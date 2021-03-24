@@ -10,8 +10,9 @@ CU     += -G -g -m64
 INCDIR  = $(patsubst %,-I%,$(subst :, ,${INCLUDE}))
 LIBDIR  = $(patsubst %,-L%,$(subst :, ,${LIBRARY_PATH}))
 
-FLAGS   = $(INCDIR)
-LDFLAGS = $(LIBDIR)\
+FLAGS   = $(INCDIR) -I ${CONDA_PREFIX}/include/healpix_cxx/ -I${CONDA_PREFIX}/include -I${CUDATOOLKIT_HOME}/include/ -I../libpsht/generic_gcc/include -I ${CUDA_HOME}/samples/common/inc
+
+LDFLAGS = $(LIBDIR) -L${CONDA_PREFIX}/lib -L${CUDATOOLKIT_HOME}/lib64 -L ${CUDA_HOME}/samples/common/lib -L../libpsht/generic_gcc/lib \
 	  -lhealpix_cxx -lcxxsupport -lcfitsio\
 	  -lpsht -lfftpack -lc_utils -lfftw3f\
 	  -lcudart -lcufft
